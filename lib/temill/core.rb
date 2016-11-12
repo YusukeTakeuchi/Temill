@@ -183,6 +183,7 @@ class Temill
       @sexp.deep_each_with_self{| v |
         if v.kind_of?(Sexp) and
             [:iter, :call].include?(v.first) and
+            v.line_range and
             v.line_range.min == caller_lineno
           last_line = [last_line, v.line_range.max].max
           if with_block and v.first == :iter and block_sexp = v[3]
