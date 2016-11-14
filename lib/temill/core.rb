@@ -16,6 +16,7 @@ class Temill
   #                              (defaults to false)
   # @option opts [Symbol,#call] :inspect method to convert obj into String
   #                              (defaults to :pretty_inspect)
+  # @option opts [bool] :annotate print annotation or not (defaults to true)
   def initialize(**opts)
     _initialize(**opts)
   end
@@ -26,7 +27,8 @@ class Temill
     tabstop: 4,
     default_indent: '  ',
     compact: false,
-    inspect: :pretty_inspect
+    inspect: :pretty_inspect,
+    annotate: true
   }
 
   # Implementation of Temill:

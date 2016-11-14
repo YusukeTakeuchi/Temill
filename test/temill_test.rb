@@ -18,6 +18,10 @@ class TemillTest < Minitest::Test
     }
   end
 
+  def assert_Temill_start_with_each_line(pat)
+    assert_start_with_each_line(pat, Temill.emit_to_string.values.first)
+  end
+
   def test_that_it_has_a_version_number
     refute_nil ::Temill::VERSION
   end
@@ -66,5 +70,17 @@ class TemillTest < Minitest::Test
       }
     EOS
     Temill.emit_to_string.values.first)
+  end
+
+  def test_annotate
+    Temill.set_options(annotate: false)
+    Temill.eval(<<-EOS)
+      Temill.show 'hello'
+    EOS
+
+    assert_Temill_start_with_each_line <<-EOS
+      Temill.show
+      # "hello"
+    EOS
   end
 end

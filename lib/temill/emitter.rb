@@ -27,7 +27,7 @@ class Temill
           if ips = sf.insertion_points.at_emitter_lineno(i)
             ips.each{| ip |
               printer.indent = ip.indent
-              printer.print_str(annotation(ip, lines_map[ip.caller_lineno]))
+              printer.print_str(annotation(ip, lines_map[ip.caller_lineno])) if @options[:annotate]
               ip.results.each{| obj |
                 printer.print(obj)
               }
